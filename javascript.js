@@ -3,11 +3,11 @@ function getComputerChoice() {
   
   switch(computerChoice) {
     case 1:
-      return "Rock";
+      return "rock";
     case 2:
-      return "Paper";
+      return "paper";
     case 3:
-      return "Scissors";
+      return "scissors";
   }
 } 
 
@@ -18,10 +18,10 @@ function playerSelection() {
     const input = prompt("Choose your play!").toLowerCase();
 
     if (input === "rock" || input === "paper" || input === "scissors") {
-      console.log(`you chose ${input}`);
+      console.log(`You chose ${input}`);
       break;
     } else {
-      console.log("Please choose a valid option");
+      console.log("Please choose a valid option: rock/paper/scissors");
     }
   }
   
