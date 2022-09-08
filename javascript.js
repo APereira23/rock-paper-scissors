@@ -78,10 +78,13 @@ function playRound() {
 
 function game() {
   let w = 0; d = 0; l = 0;
+  let round = 1;
   for (let i = 1; i < 6; i++) {
     console.log(`Win: ${w}. Draw: ${d}. Lose: ${l}`)
+    console.log(`Starting Round ${round}/5`)
     
     playRound();
+    round++;
     
     if (result == "win") {
       w++;
@@ -92,19 +95,21 @@ function game() {
     } else {
       console.log("error");
     }
+  
+  confirm("Round over. Press [enter] to continue.");
+  console.clear();
   }
 
   console.log(`Final Score: Win: ${w}. Draw: ${d}. Lose: ${l}`);
 
   if (w > l) {
-    console.log("YOU WON THE GAME! CONGRATULATIONS!");
+    confirm("You won the game! Congratulations!");
   } else if (w < l) {
-    console.log("YOU LOST THE GAME!");
+    confirm("Computer wins!");
   } else {
-    console.log("IT'S A DRAW!");
+    confirm("It's a draw!");
   }
 
-  confirm("end");
 }
 
 game();
