@@ -11,27 +11,19 @@ function getComputerChoice() {
   }
 } 
 
-
 function getPlayerChoice() {
-  invalidInput = true;
-  while (invalidInput = true) {
-    const input = prompt("Choose your play!").toLowerCase();
+  const buttons = document.querySelectorAll('.buttons');
 
-    if (input === "rock" || input === "paper" || input === "scissors") {
-      return input;
-    } else {
-      console.log("Please choose a valid option (rock/paper/scissors)");
-    }
-  }
-  
-}
+  buttons.forEach(playBtn => playBtn.addEventListener('click', function(e) {
+    if (e.target.className !== 'playBtn') return;
+    if (e.target.id === 'rockBtn') playerSelection = "rock";
+    if (e.target.id === 'paperBtn') playerSelection = "paper";
+    if (e.target.id === 'scissorsBtn') playerSelection = "scissors";
+  }));
 
+}  
 
-function playRound() {
-
-  const playerSelection = getPlayerChoice();
-  const computerSelection = getComputerChoice();
-  console.log (`You chose ${playerSelection}. Computer chose ${computerSelection}.`);
+function compare(computerSelection, playerSelection) {
 
   if (playerSelection == "rock") {
     switch (computerSelection) {
@@ -76,7 +68,23 @@ function playRound() {
 
 }
 
-function game() {
+function playRound() {
+  getComputerChoice();
+  getPlayerChoice();
+
+  const playerSelection = getPlayerChoice();
+  const computerSelection = getComputerChoice();
+  console.log (`You chose ${playerSelection}. Computer chose ${computerSelection}.`);
+  compare();
+}
+
+
+window.addEventListener('click', playRound);
+
+
+
+/*
+function playGame() {
   let w = 0; d = 0; l = 0;
   let round = 1;
   for (let i = 1; i < 6; i++) {
@@ -112,6 +120,8 @@ function game() {
 
 }
 
-game();
+playGame();
+*/
+
 
 

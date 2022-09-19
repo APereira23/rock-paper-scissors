@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.playBtn {
+  background-color:beige;
+  cursor: pointer;
+  font-size: 2rem;
+  padding: 20px;
+  transition: 100ms;
+  border-radius: 50%;
+}
+
+.playBtn:hover {
+  transform: scale(1.2);
+}
