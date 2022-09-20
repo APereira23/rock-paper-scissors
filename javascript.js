@@ -1,3 +1,84 @@
+// List of Variables
+
+const buttons = document.querySelectorAll('.playBtn');
+const score = document.querySelector('.score');
+const playerScore = document.querySelector('.playerScore');
+const computerScore = document.querySelector('.computerScore');
+const result = document.querySelector('.result');
+const roundNum = document.querySelector('.roundNum');
+const selections = document.querySelector('.selections');
+const nextRound = document.querySelector('.nextRound');
+const instructions = document.querySelectorAll('.instructions');
+const endGame = document.querySelector('.endGame');
+const endText = document.querySelector('.endText')
+const restartBtn = document.querySelector('.restartBtn')
+
+// ------------------------------------------------------
+
+roundNum.textContent = 1;
+playerScore.textContent = 0;
+computerScore.textContent = 0;
+
+
+//button-click Event Listener
+
+buttons.forEach(playBtn => playBtn.addEventListener('click', playRound));
+
+
+// -------  main function ---------
+
+function playRound(e) {
+  selections.style.display = "block";
+  result.style.display = "block";
+  const playerSelection = e.target.id;
+  const computerSelection = getComputerChoice();
+  showSelections(playerSelection, computerSelection);
+  getResult(playerSelection, computerSelection);
+  nextRound.style.display = "block";
+  instructions.forEach(instructions => instructions.style.display = "none");
+  score.style.display = "none";
+  buttons.forEach(playBtn => playBtn.style.display = "none");
+
+}
+// continue to next round
+nextRound.addEventListener('click', (e) => {
+  roundNum.textContent++;
+  selections.style.display = "none";
+  result.style.display = "none";
+  nextRound.style.display = "none";
+  instructions.forEach(instructions => instructions.style.display = "block");
+  buttons.forEach(playBtn => playBtn.style.display = "flex");
+  score.style.display = "block";
+
+// ------  Winning Condition ------
+  const p = playerScore.textContent;
+  const c = computerScore.textContent;
+  getWinner(p, c);
+
+});
+
+
+
+// --------------   auxiliary functions    -------------
+
+function getWinner(p, c) {
+  if (p == 5) {
+    endText.textContent = "You won the game! Well done!";
+    endGame.style.display = "block";
+    return;
+  } else if (c == 5) {
+    endText.textContent = "Computer Wins! Better luck next time.";
+    endGame.style.display = "block";
+    return;
+  } else {
+    return;
+  }
+}
+
+function refresh() {  //restart button reloads the page
+  window.location.reload("refresh");
+}
+
 function getComputerChoice() {
   const computerChoice = Math.floor(Math.random() * 3 + 1);
   
@@ -11,117 +92,45 @@ function getComputerChoice() {
   }
 } 
 
-function getPlayerChoice() {
-  const buttons = document.querySelectorAll('.buttons');
+function showSelections(playerSelection, computerSelection) {
+  selections.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}.`;
+}
 
-  buttons.forEach(playBtn => playBtn.addEventListener('click', function(e) {
-    if (e.target.className !== 'playBtn') return;
-    if (e.target.id === 'rockBtn') playerSelection = "rock";
-    if (e.target.id === 'paperBtn') playerSelection = "paper";
-    if (e.target.id === 'scissorsBtn') playerSelection = "scissors";
-  }));
-
-}  
-
-function compare(computerSelection, playerSelection) {
-
-  if (playerSelection == "rock") {
-    switch (computerSelection) {
-    case "rock":
-      console.log("Draw!");
-      return result = "draw";
-    case "paper":
-      console.log("You lost! Paper beats rock");
-      return result = "lose";
-    case "scissors":
-      console.log("You win! Rock beats scissors!");
-      return result = "win";
+function getResult(playerSelection, computerSelection) {
+  
+  if (playerSelection == computerSelection) {
+    return result.textContent = "Draw!";
+  } else if (playerSelection == "rock") {
+      switch (computerSelection) {
+      case "paper":
+        result.textContent = "You lost! Paper beats rock";
+        return computerScore.textContent++;
+      case "scissors":
+        result.textContent = "You win! Rock beats scissors!";
+        return playerScore.textContent++;
     } 
   } else if (playerSelection == "paper") {
       switch (computerSelection) {
       case "rock":
-        console.log("You win! Paper beats Rock!");
-        return result = "win";
-      case "paper":
-        console.log("Draw!");
-        return result = "draw";
+        result.textContent = "You win! Paper beats Rock!";
+        return playerScore.textContent++;
       case "scissors":
-        console.log("You lost! Scissors beat Paper!");
-        return result = "lose";
+        result.textContent = "You lost! Scissors beat Paper!";
+        return computerScore.textContent++;
       }
   } else if (playerSelection == "scissors") {
       switch (computerSelection) {
       case "rock":
-        console.log("You lost! Rock beats Scissors!");
-        return result = "lose";
+        result.textContent = "You lost! Rock beats Scissors!";
+        return computerScore.textContent++;
       case "paper":
-        console.log("You win! Scissors beat Paper!");
-        return result = "win";
-      case "scissors":
-        console.log("Draw!");
-        return result = "draw";
+        result.textContent = "You win! Scissors beat Paper!";
+        return playerScore.textContent++;
       }
   } else {
-    console.log("error");
-    return "error";
+    return alert("error");
   }
 
 }
-
-function playRound() {
-  getComputerChoice();
-  getPlayerChoice();
-
-  const playerSelection = getPlayerChoice();
-  const computerSelection = getComputerChoice();
-  console.log (`You chose ${playerSelection}. Computer chose ${computerSelection}.`);
-  compare();
-}
-
-
-window.addEventListener('click', playRound);
-
-
-
-/*
-function playGame() {
-  let w = 0; d = 0; l = 0;
-  let round = 1;
-  for (let i = 1; i < 6; i++) {
-    console.log(`Win: ${w}. Draw: ${d}. Lose: ${l}`)
-    console.log(`Starting Round ${round}/5`)
-    
-    playRound();
-    round++;
-    
-    if (result == "win") {
-      w++;
-    } else if (result == "draw") {
-      d++;
-    } else if (result == "lose") {
-      l++;
-    } else {
-      console.log("error");
-    }
-  
-  confirm("Round over. Press [enter] to continue.");
-  console.clear();
-  }
-
-  console.log(`Final Score: Win: ${w}. Draw: ${d}. Lose: ${l}`);
-
-  if (w > l) {
-    confirm("You won the game! Congratulations!");
-  } else if (w < l) {
-    confirm("Computer wins!");
-  } else {
-    confirm("It's a draw!");
-  }
-
-}
-
-playGame();
-*/
-
 
 

@@ -1,17 +1,127 @@
+body {
+  background-color: rgb(63, 139, 156);
+}
+
+.header {
+  background-color: aliceblue;
+  position: relative;
+  top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  text-align: center;
+  font-size: 50px;
+  padding: 30px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.title {
+  border: solid rgba(25, 61, 86, 0.995);
+  border-style:dotted;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: rgba(25, 61, 86, 0.995);
+}
+
 .buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+
 }
 
 .playBtn {
-  background-color:beige;
+  background-color:rgba(25, 61, 86, 0.995);
+  border: none;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 4rem;
   padding: 20px;
-  transition: 100ms;
+  transition: 1000ms;
   border-radius: 50%;
+
 }
 
 .playBtn:hover {
   transform: scale(1.2);
+  border-color: aliceblue;
+  box-shadow: 0 0 2rem aliceblue;
 }
+
+
+.roundRow {
+  display:flex;
+  justify-content: center;
+}
+
+.round,
+.roundNum {
+  color: aliceblue;
+  padding: 20px;
+  font-size: 35px;
+  font-weight: 900;
+}
+
+.roundNum {
+  margin-left: -25px;
+}
+
+.instructions {
+  text-align: center;
+  color: aliceblue;
+  font-size: 20px;
+}
+
+.score {
+  font-size: 18px;
+  color: aliceblue;
+  font-weight: 700;
+}
+
+.selections,
+.result {
+  color: aliceblue;
+  font-size: 20px;
+  text-align: center;
+}
+
+.playing {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
+.nextRound {
+  cursor: pointer;
+  display: none;
+  font-size: 18px;
+}
+
+.endBtn {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* GameOver WIndow */
+.endGame {
+  z-index: 1;
+  opacity: 95%;
+  background-color: aliceblue;
+  border: solid;
+  border-radius: 10%;
+  padding: 130px;
+  position: absolute;
+  top: 40%;
+  font-size: 18px;
+  display: none;
+}
+
+
+.restart {
+  display:flex;
+  justify-content: center;
+}
+
+.restartBtn {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+

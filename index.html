@@ -9,10 +9,55 @@
   <script src="javascript.js" defer></script>
 </head>
 <body>
-  <div class="buttons">
-    <button class="playBtn" id="rockBtn">Rock</button>
-    <button class="playBtn" id="paperBtn">Paper</button>
-    <button class="playBtn" id="scissorsBtn">Scissors</button>
+  <div class="header">
+    <div class="title">ROCK * PAPER * SCISSORS</div>
   </div>
+  <div class="roundRow">
+    <span></span>
+    <span class="round">Round</span>
+      <span class="roundNum"></span>
+    <span></span>
+  </div>
+  <div class="instructions">Choose your move!</div>  
+  <br>
+  <div class="instructions">Whoever reaches 5 points first wins the game.</div>
+  <br>
+  <br>
+  <div class="buttons">
+    <button class="playBtn" id="rock">🪨</button>
+    <button class="playBtn" id="paper">🧻</button>
+    <button class="playBtn" id="scissors">✂️</button>
+  </div>
+  <br><br>
+  <div class="score">
+    <span class="player">Player: </span>
+      <span class="playerScore"></span>
+    <br><br>
+    <span class="computer">Computer: </span>
+      <span class="computerScore"></span>
+  </div>
+  <br>
+  <div class="selections"></div>
+  <br>
+  <div class="result"></div>
+  <br>
+  <br>
+  <div class="endBtn">
+    <div></div>
+    <div>
+      <button class="nextRound">Continue</button>
+    </div>
+    <div></div>
+  <div class="endGame">
+    <p class="endText"></p>
+    <div class="restart">
+      <div></div>
+      <div>
+        <button class="restartBtn" onclick="refresh(this)">Restart</button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+
 </body>
 </html>
